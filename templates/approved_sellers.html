@@ -1,0 +1,136 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approved Sellers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #ece9e6, #ffffff);
+            font-family: 'Mooli', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .container h2 {
+            margin-bottom: 20px;
+            color: #343a40;
+            text-align: center;
+        }
+        .seller {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .seller:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Approved Sellers</h2>
+        {% if sellers %}
+            {% for seller in sellers %}
+                <div class="seller">
+                    <h4>{{ seller.company_name }}</h4>
+                    <p><strong>Name:</strong> {{ seller.user }}</p>
+                    <p><strong>Location:</strong> {{ seller.location }}</p>
+                    <p><strong>Email:</strong> {{ seller.email }}</p>
+                    <p><strong>Phone:</strong> {{ seller.phone }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No approved sellers found.</p>
+        {% endif %}
+    </div>
+</body>
+</html> {% endcomment %}
+
+
+
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approved Sellers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'stle.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #ece9e6, #ffffff);
+            font-family: 'Mooli', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .container h2 {
+            margin-bottom: 20px;
+            color: #343a40;
+            text-align: center;
+        }
+        .seller {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .seller:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Approved Sellers</h2>
+        {% if sellers %}
+            {% for seller in sellers %}
+                <div class="seller">
+                    <div>
+                        <h4>{{ seller.company_name }}</h4>
+                        <p><strong>Location:</strong> {{ seller.location }}</p>
+                        <p><strong>Email:</strong> {{ seller.email }}</p>
+                        <p><strong>Phone:</strong> {{ seller.phone }}</p>
+                    </div>
+                    <div>
+                        <form action="{% url 'delete_seller' seller.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa-solid fa-trash-can"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No approved sellers found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+

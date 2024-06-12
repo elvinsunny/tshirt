@@ -1,0 +1,232 @@
+{% comment %} <!-- order_history.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Order History</h1>
+    {% if orders %}
+        {% for order in orders %}
+            <div>
+                <h3>Order #{{ order.id }}</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.orderitem_set.all %}
+                            <tr>
+                                <td>{{ item.product.name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>₹ {{ item.total_price }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <h4>Status:</h4>
+                {% if order_statuses %}
+                    {% for status in order_statuses %}
+                        {% if status.order.id == order.id %}
+                            <p>{{ status.pstatus }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <p>Pending</p>
+                {% endif %}
+                
+                <!-- Link to order detail page -->
+                <a href="{% url 'order_detail' order.id %}">View Order Details</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>You have no orders.</p>
+    {% endif %}
+</body>
+</html> {% endcomment %}
+
+
+{% comment %} 
+
+{% load static %}
+{% include 'navnar1.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'stle.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+    
+    <h1>Order History</h1>
+    {% if orders %}
+        {% for order in orders %}
+            <div>
+                <h3>Order #{{ order.id }}</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.orderitem_set.all %}
+                            <tr>
+                                <td>{{ item.product.name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>₹ {{ item.total_price }}</td>
+                                <td>{{ item.status }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+                <!-- Link to order detail page -->
+                <a href="{% url 'order_detail' order.id %}">View Order Details</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>You have no orders.</p>
+    {% endif %}
+</body>
+</html> {% endcomment %}
+
+{% load static %}
+{% include 'navnar1.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'stle.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #28a745; /* Light green */
+            color: white;
+            border-radius: 10px 10px 0 0;
+            padding: 10px 20px;
+        }
+        .table {
+            margin-bottom: 0;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .table th {
+            background-color: #28a745; /* Light green */
+            color: white;
+            border: none;
+        }
+
+        .table td {
+            border: none;
+            color: #555;
+        }
+
+        .btn-primary {
+            background-color: #28a745; /* Light green */
+            border-color: #28a745; /* Light green */
+            border-radius: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #218838; /* Slightly darker green */
+            border-color: #218838; /* Slightly darker green */
+        }
+
+        .text-center {
+            margin-top: 50px;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 900px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Order History</h1>
+        {% if orders %}
+            {% for order in orders %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h3>Order #{{ order.id }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Total Price</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in order.orderitem_set.all %}
+                                    <tr>
+                                        <td>{{ item.product.name }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                        <td>₹ {{ item.total_price }}</td>
+                                        <td>{{ item.status }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <a href="{% url 'order_detail' order.id %}" class="btn btn-primary mt-3">View Order Details</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center">You have no orders.</p>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

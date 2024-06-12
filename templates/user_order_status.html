@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Order Status</title>
+</head>
+<body>
+    <h1>User Order Status</h1>
+    <ul>
+        {% for user in users %}
+        <li>{{ user.username }}</li>
+        <ul>
+            {% for order in user.order_set.all %}
+            <li>Order #: {{ order.id }} - Status: {{ order.statuses.last.status }}</li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </ul>
+</body>
+</html>

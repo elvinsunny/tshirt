@@ -1,0 +1,282 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helmet Website</title>
+    <link rel="stylesheet" href="{% static 'stle.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+            
+            .dropdown {
+                position: relative;
+                display: inline-block;
+              }
+          
+              .dropbtn {
+                padding: 10px;
+                font-size: 16px;
+                border: none;
+                cursor: pointer;
+                color:green;
+              }
+          
+              .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+              }
+          
+              .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+              }
+          
+              .dropdown-content a:hover {
+                background-color: #f1f1f1;
+              }
+          
+              .dropdown:hover .dropdown-content {
+                display: block;
+              }
+          
+              .dropdown:hover .dropbtn {
+                background-color: #3e8e41;
+                color: white;
+              }
+
+              /* Profile Dropdown Styles */
+              .profile-dropdown {
+                  position: relative;
+                  display: inline-block;
+              }
+              
+              .profile-dropbtn {
+                  padding: 10px;
+                  font-size: 16px;
+                  border: none;
+                  cursor: pointer;
+                  color: green;
+              }
+              
+              .profile-dropdown-content {
+                  display: none;
+                  position: absolute;
+                  background-color: #f9f9f9;
+                  min-width: 160px;
+                  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                  z-index: 1;
+              }
+              
+              .profile-dropdown-content a {
+                  color: black;
+                  padding: 12px 16px;
+                  text-decoration: none;
+                  display: block;
+              }
+              
+              .profile-dropdown-content a:hover {
+                  background-color: #f1f1f1;
+              }
+              
+              .profile-dropdown:hover .profile-dropdown-content {
+                  display: block;
+              }
+              
+              .profile-dropdown:hover .profile-dropbtn {
+                  background-color: #3e8e41;
+                  color: white;
+              }
+              
+
+
+        </style>
+        
+   
+</head>
+<body>
+    {% include 'messages.html' %}
+    <!-- Logo -->
+    {% comment %} <section id="header">
+        <a href="#"><img src="{% static 'uploads/logo-png.png' %}" class="logo" alt=""></a>
+
+        <!-- Navigation Bar -->
+        <div>
+            <ul id="navbar">
+                <li><a class="active" href="index.html">Home</a></li>
+                <li> 
+                    <div class="dropdown">
+                        <button class="dropbtn">Category</button>
+                        <div class="dropdown-content">
+                            {% for category in categories %}
+                                <a href="#{{ category.name|slugify }}">{{ category.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </li>
+                {% if user.is_authenticated %}
+                <li><a href="#">Welcome, {{ user.username }}</a></li>
+
+                <li class="profile-dropdown">
+                    <button class="profile-dropbtn">Profile</button>
+                    <div class="profile-dropdown-content">
+                        <a href="{% url 'view_profile' %}">View Profile</a>
+                        <a href="{% url 'order_history' %}">Order History</a>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </li>
+            {% else %}
+                <li><a href="{% url 'customer_login' %}">Login</a></li>
+            {% endif %}
+                  {% endcomment %}
+
+
+                
+                    {% comment %} {% if user.is_authenticated %}
+                    <li><a href="{% url 'view_profile' %}">View Profile</a></li>
+                    <li><a href="{% url 'order_history' %}">Order History</a></li> 
+                      <li>  <a href="#">Welcome, {{ user.username }}</a></li>
+                      <li>  <a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                       <li> <a href="{% url 'customer_login' %}">Login</a></li>
+                    {% endif %} {% endcomment %}
+{% comment %}                
+                 <li><a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a></li> 
+                
+
+                 <li>
+                    <form action="{% url 'search_results' %}" method="get">
+                        <input type="text" name="query" placeholder="Search...">
+                        <button type="submit">Search</button>
+                    </form>
+                </li>
+
+
+            </ul>
+        </div>
+    </section> {% endcomment %}
+
+
+    <section id="header">
+        <a href="#"><img src="{% static 'uploads/logo-png.png' %}" class="logo" alt=""></a>
+    
+        <!-- Navigation Bar -->
+        <div>
+            <ul id="navbar">
+                <li>
+                    <form class="form-inline" action="{% url 'search_results' %}" method="get">
+                        <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search..." aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </li>
+                <li><a class="active" href="index.html">Home</a></li>
+                <li> 
+                    <div class="dropdown">
+                        <button class="dropbtn">Category</button>
+                        <div class="dropdown-content">
+                            {% for category in categories %}
+                                <a href="#{{ category.name|slugify }}">{{ category.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </li>
+                
+                {% if user.is_authenticated %}
+                    <li><a href="#">Welcome, {{ user.username }}</a></li>
+    
+                    <li class="profile-dropdown">
+                        <button class="profile-dropbtn">Profile</button>
+                        <div class="profile-dropdown-content">
+                            <a href="{% url 'view_profile' %}">View Profile</a>
+                            <a href="{% url 'order_history' %}">Order History</a>
+                            <a href="{% url 'logout' %}">Logout</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'customer_login' %}">Login</a></li>
+                {% endif %}
+                
+                <li><a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a></li> 
+
+            </ul>
+        </div>
+    </section>
+    
+        
+        <div class="image"><img src="{% static 'uploads/anime-cover.jpg' %}" alt="Image"></div>
+    </section>
+
+    <!-- Category -->
+    <h1 style="text-align: center;">Category</h1>
+    
+
+
+    {% for category in categories %}
+<section id="product1" class="section-p1">
+    <section id="{{ category.name|slugify }}" class="product-section">
+        <h4>{{ category.name }}</h4>
+        <div class="pro-container">
+            {% for product in category.product_set.all %}
+                {% if product.status == 'approved' %}
+                    <!-- Card -->
+                    <div class="pro">
+                        <a href="{% url 'product_detail' product.id %}">
+                            <img src="{{ product.image.url }}" alt="">
+                        </a>
+                        <div class="des">
+                            <span>{{ product.name }}</span>
+                            <h4>₹{{ product.price }}</h4>
+                            <h5>{{ product.description }}</h5>
+                            {% if product.is_out_of_stock %}
+                                <p style="color: red;">Out of Stock.</p>
+                            {% else %}
+                                <p>Available: {{ product.quantity }} in stock</p>
+                            {% endif %}
+                            <div style="display: flex; justify-content: center; align-items: center;" class="btn">
+                                <a href="{% url 'product_detail' product.id %}" class="button">BUY NOW</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+</section>
+{% endfor %}
+
+
+
+    <!-- Your existing JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var categoryLinks = document.querySelectorAll('.dropdown-content a');
+
+            categoryLinks.forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var targetCategoryId = link.getAttribute('href').substring(1);
+                    var targetCategorySection = document.getElementById(targetCategoryId);
+
+                    if (targetCategorySection) {
+                        targetCategorySection.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+

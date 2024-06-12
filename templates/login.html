@@ -1,0 +1,193 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Login</title>
+</head>
+<body>
+    {% include 'messages.html' %}
+    <h2>Customer Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <p><a href="{% url 'password_reset' %}">Forgot Password?</a></p> <!-- Add this line -->
+
+    <p>Don't have an account? <a href="{% url 'customer_signup' %}">Sign up here</a></p>
+    <p>Are you a seller? <a href="{% url 'seller_login' %}">Seller Login</a></p>
+    
+</body>
+</html> {% endcomment %}
+
+
+
+
+{% comment %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Mooli', sans-serif;
+        }
+        .login-container {
+            margin-top: 100px;
+            max-width: 400px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+        .login-container .btn-primary {
+            background-color: #0d7002;
+            border-color: #0d7002;
+        }
+        .login-container .btn-primary:hover {
+            background-color: #0a5a02;
+            border-color: #0a5a02;
+        }
+        .login-container a {
+            color: #0d7002;
+        }
+        .login-container a:hover {
+            color: #0a5a02;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="login-container">
+                {% include 'messages.html' %}
+                <h2 class="text-center">Customer Login</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+                <div class="text-center mt-3">
+                    <p><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
+                    <p>Don't have an account? <a href="{% url 'customer_signup' %}">Sign up here</a></p>
+                    <p>Are you a seller? <a href="{% url 'seller_login' %}">Seller Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html> {% endcomment %}
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #ece9e6, #ffffff);
+            font-family: 'Mooli', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            max-width: 400px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .login-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+        .login-container .btn-primary {
+            background-color: #0d7002;
+            border-color: #0d7002;
+            border-radius: 20px;
+        }
+        .login-container .btn-primary:hover {
+            background-color: #0a5a02;
+            border-color: #0a5a02;
+        }
+        .login-container a {
+            color: #0d7002;
+        }
+        .login-container a:hover {
+            color: #0a5a02;
+        }
+        .form-group input {
+            border-radius: 20px;
+        }
+        .form-group label {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+   
+
+    <div class="login-container">
+        {% include 'messages.html' %}
+        <h2 class="text-center">Customer Login</h2>
+        {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+        {% endif %}
+        <form method="post" id="login-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+        <div class="text-center mt-3">
+            <p><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
+            <p>Don't have an account? <a href="{% url 'customer_signup' %}">Sign up here</a></p>
+            <p>Are you a seller? <a href="{% url 'seller_login' %}">Seller Login</a></p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#login-form').on('submit', function (event) {
+                var username = $('input[name="username"]').val();
+                var password = $('input[name="password"]').val();
+
+                if (!username || !password) {
+                    event.preventDefault();
+                    $('.alert').remove();
+                    $('.login-container').prepend('<div class="alert alert-danger" role="alert">Please fill in both username and password.</div>');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

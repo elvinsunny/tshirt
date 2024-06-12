@@ -1,0 +1,39 @@
+{% load static %}
+{% include 'navbar.html' %}
+
+<link rel="stylesheet" href="{% static 'stle.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Company Name</th>
+                <th>Location</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Approve</th>
+                <th>Reject</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for seller in new_suppliers %}
+            <tr>
+                <td>{{ seller.user.username }}</td>
+                <td>{{ seller.company_name }}</td>
+                <td>{{ seller.location }}</td>
+                <td>{{ seller.email }}</td>
+                <td>{{ seller.phone }}</td>
+                <td>
+                    <input type="checkbox" name="approve" value="{{ seller.id }}">
+                </td>
+                <td>
+                    <input type="checkbox" name="reject" value="{{ seller.id }}">
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit">Submit</button>
+</form>

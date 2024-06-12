@@ -1,0 +1,34 @@
+
+
+
+
+
+{% comment %} 
+{% block content %} {% endcomment %}
+# addproduct.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Product</title>
+</head>
+<body>
+    <div class="container">
+      <h1>Create Product</h1>
+  
+      <!-- Display error messages if any -->
+      {% include 'messages.html' %}
+  
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <br>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+    </div>
+  </body>
+  
+</html>
+{% comment %} {% endblock %} {% endcomment %}

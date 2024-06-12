@@ -1,0 +1,19 @@
+<!-- product_customers.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers Who Bought {{ product.name }}</title>
+</head>
+<body>
+    <h1>Customers Who Bought {{ product.name }}</h1>
+    <ul>
+        {% for order in orders %}
+            <li>{{ order.user.username }}</li>
+        {% endfor %}
+    </ul>
+
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+{% comment %} <!-- seller_products.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Products</title>
+</head>
+<body>
+    <h1>Seller Products</h1>
+    <ul>
+        {% for product in products %}
+            <li>
+                {{ product.name }} - <a href="{% url 'update_product' product.id %}">Update</a> - <a href="{% url 'delete_product' product.id %}">Delete</a>
+            </li>
+            <!-- Add any other product details you want to display -->
+        {% endfor %}
+    </ul>
+</body>
+</html> {% endcomment %}
+
+
+{% load static %}
+
+ {% include "nav_bar.html" %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Products</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        body {
+            background: linear-gradient(to right, #ece9e6, #ffffff);
+            font-family: 'Mooli', sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .img {
+            max-width: 50px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .action-buttons button {
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .action-buttons button:hover {
+            color: #f80000;
+        }
+    </style>
+</head>
+<body>
+    {% include 'messages.html' %}
+    <div class="container">
+        <div class="header">
+            <p>Product Details</p>
+            <div>
+                <input placeholder="Search product" />
+
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Category</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>₹{{ product.price }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>
+                        S: {{ product.quantity_S }}<br>
+                        M: {{ product.quantity_M }}<br>
+                        L: {{ product.quantity_L }}<br>
+                        XL: {{ product.quantity_XL }}
+                    </td>
+                    <td>{{ product.category.name }}</td>
+                    <td><img src="{{ product.image.url }}" alt="{{ product.name }}" class="img"></td>
+                    <td class="action-buttons">
+                        <a href="{% url 'update_product' product.id %}">
+                            <button>
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                        </a>
+                        <a href="{% url 'delete_product' product.id %}">
+                            <button>
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>   
+    </div>
+</body>
+</html>

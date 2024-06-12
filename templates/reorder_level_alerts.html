@@ -1,0 +1,163 @@
+{% comment %} <!-- reorder_level_alerts.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reorder Level Alerts</title>
+</head>
+<body>
+    <h1>Reorder Level Alerts</h1>
+    {% if products %}
+        <ul>
+            {% for product in products %}
+                <li>{{ product.name }} - {{ product.reorder_level }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No products require reorder at this time.</p>
+    {% endif %}
+</body>
+</html> {% endcomment %}
+
+
+{% comment %} 
+<!-- reorder_level_alerts.html -->
+{% load static %}
+ {% include "nav_bar.html" %} 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reorder Level Alerts</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        /* Add your CSS styles for highlighting here */
+        .reorder-alert {
+            background-color: yellow; /* Change the background color to yellow for highlighting */
+        }
+    </style>
+</head>
+<body>
+    <h1>Reorder Level Alerts</h1>
+    {% if products %}
+        <ul>
+            {% for product in products %}
+                <li {% if product.needs_reorder %}class="reorder-alert"{% endif %}>
+                    <a href="{% url 'update_product' product.id %}">
+                        <strong>{{ product.name }}</strong> - Reorder Level: {{ product.reorder_level }}
+                    </a>
+                    <ul>
+                        <li>Small (S): {{ product.quantity_S }}</li>
+                        <li>Medium (M): {{ product.quantity_M }}</li>
+                        <li>Large (L): {{ product.quantity_L }}</li>
+                        <li>Extra Large (XL): {{ product.quantity_XL }}</li>
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No products require reorder at this time.</p>
+    {% endif %}
+</body>
+</html> {% endcomment %}
+
+
+
+
+
+{% load static %}
+{% include "nav_bar.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reorder Level Alerts</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        /* Custom CSS for the reorder level alerts page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+
+        .reorder-alert {
+            background-color: #ffcc00; /* Yellow background color for reorder alerts */
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        ul li ul {
+            margin-top: 10px;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li ul li {
+            padding-left: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reorder Level Alerts</h1>
+    {% if products %}
+        <ul>
+            {% for product in products %}
+                <li {% if product.needs_reorder %}class="reorder-alert"{% endif %}>
+                    <a href="{% url 'update_product' product.id %}">
+                        <strong>{{ product.name }}</strong> - Reorder Level: {{ product.reorder_level }}
+                    </a>
+                    <ul>
+                        <li>Small (S): {{ product.quantity_S }}</li>
+                        <li>Medium (M): {{ product.quantity_M }}</li>
+                        <li>Large (L): {{ product.quantity_L }}</li>
+                        <li>Extra Large (XL): {{ product.quantity_XL }}</li>
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No products require reorder at this time.</p>
+    {% endif %}
+</body>
+</html>
+

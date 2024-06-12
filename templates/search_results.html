@@ -1,0 +1,180 @@
+{% comment %} {% load static %}
+
+    
+        <h1>Search Results for "{{ query }}"</h1>
+        {% if products %}
+            <section id="product1" class="section-p1">
+                <div class="pro-container">
+                    {% for product in products %}
+                        {% if product.status == 'approved' %}
+                            <div class="pro">
+                                <a href="{% url 'product_detail' product.id %}">
+                                    <img src="{{ product.image.url }}" alt="">
+                                </a>
+                                <div class="des">
+                                    <span>{{ product.name }}</span>
+                                    <h4>₹{{ product.price }}</h4>
+                                    <h5>{{ product.description }}</h5>
+
+                                  
+                                    <div style="display: flex; justify-content: center; align-items: center;" class="btn">
+                                        <a href="{% url 'product_detail' product.id %}" class="button">BUY NOW</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+        {% else %}
+            <p>No products found matching your search criteria.</p>
+        {% endif %}
+    </body>
+    </html>
+     {% endcomment %}
+
+
+
+     {% load static %}
+     {% include "navnar1.html" %} 
+     <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'stle.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .section-p1 {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .pro-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .pro {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s ease-in-out;
+            width: 300px;
+            text-align: center;
+        }
+
+        .pro img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .des {
+            padding: 20px;
+        }
+
+        .des span {
+            display: block;
+            color: #555;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .des h4 {
+            color: #333;
+            margin: 10px 0;
+            font-size: 20px;
+        }
+
+        .des h5 {
+            color: #777;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .btn {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #ff6600;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #e65c00;
+        }
+
+        .pro:hover {
+            transform: scale(1.05);
+        }
+
+        p {
+            text-align: center;
+            color: #777;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Search Results for "{{ query }}"</h1>
+{% if products %}
+    <section id="product1" class="section-p1">
+        <div class="pro-container">
+            {% for product in products %}
+                {% if product.status == 'approved' %}
+                    <div class="pro">
+                        <a href="{% url 'product_detail' product.id %}">
+                            <img src="{{ product.image.url }}" alt="">
+                        </a>
+                        <div class="des">
+                            <span>{{ product.name }}</span>
+                            <h4>₹{{ product.price }}</h4>
+                            <h5>{{ product.description }}</h5>
+                            <div class="btn">
+                                <a href="{% url 'product_detail' product.id %}" class="button">BUY NOW</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+{% else %}
+    <p>No products found matching your search criteria.</p>
+{% endif %}
+
+</body>
+</html> 

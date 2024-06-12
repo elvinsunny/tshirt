@@ -1,0 +1,57 @@
+<!-- templates/seller_profile.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Profile</title>
+    <link rel="stylesheet" href="{% static 'stle.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        .profile-container {
+            width: 60%;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .profile-container h1 {
+            margin-bottom: 20px;
+        }
+
+        .profile-details {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .profile-details span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    {% include 'messages.html' %}
+    {% include 'nav_bar.html' %}
+    
+    <div class="profile-container">
+        <h1>Seller Profile</h1>
+        <div class="profile-details">
+            <p><span>Company Name:</span> {{ seller.company_name }}</p>
+            <p><span>Location:</span> {{ seller.location }}</p>
+            <p><span>Email:</span> {{ seller.email }}</p>
+            <p><span>Phone:</span> {{ seller.phone }}</p>
+            <p><span>Approved:</span> {{ seller.is_approved|yesno:"Yes,No" }}</p>
+        </div>
+        <a href="{% url 'edit_seller_profile' %}">Edit Profile</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!-- messages.html -->
+{% if messages %}
+    <script>
+        // Function to display messages in a popup
+        function displayMessages() {
+            // Loop through each message and show it in a popup
+            {% for message in messages %}
+                alert("{{ message }}");
+            {% endfor %}
+        }
+        // Call the function when the page loads
+        window.onload = displayMessages;
+    </script>
+{% endif %}

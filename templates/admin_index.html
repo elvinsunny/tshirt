@@ -1,0 +1,319 @@
+ {% comment %} {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helmet Website</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+  
+      .dropbtn {
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        color:green;
+      }
+  
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+  
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+  
+      .dropdown-content a:hover {
+        background-color: #f1f1f1;
+      }
+  
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+  
+      .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+        color: white;
+      }
+</style>
+
+
+
+</head>
+<body>
+
+    <!-- Logo -->
+    <section id="header">
+        <a href="#"><img src="{% static 'uploads/logo.png' %}" class="logo" alt=""></a>
+
+        <!-- Navigation Bar -->
+        <div>
+            <ul id="navbar">
+                <li><a class="active" href="index.html">Home</a></li>
+                <li> 
+                <div class="dropdown">
+                    <button class="dropbtn">Category</button>
+                    <div class="dropdown-content">
+                        {% for category in categories %}
+                            <a href="#">{{ category.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div> </li>
+                <li><a href="{% url 'view' %}">ADMIN</a></li>
+                {% if user.is_authenticated %}
+                    <p>Welcome, {{ user.username }}</p>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <!-- Your login form or content for not logged-in users -->
+                {% endif %}
+                <li><a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Home Page -->
+    <section id="hero">
+        <div class="text">
+            <div class="img" style="margin-left: 227px; margin-bottom: 20px;">
+                <img src="{% static 'uploads/logo.png' %}" class="cl" alt="">
+            </div>
+            <h2>THE HELMET BIN</h2>
+            <h4>AXOR HELMETS AND VEGA HELMETS</h4>
+            <h5>ALL INDIA SELLER</h5>
+            <div class="btn"><button class="button">Shop Now</button></div>
+        </div>
+        <div class="image"><img src="{% static 'uploads/logo.png' %}" alt="Image"></div>
+    </section>
+
+    <!-- Category -->
+    <h1 style="text-align: center;">Category</h1>
+
+
+ {% for category in categories %}
+    <section id="product1" class="section-p1">
+        <section id="{{ category.name|slugify }}" class="product-section">
+        <h4>{{ category.name}}</h4>
+        <div class="pro-container">
+            {% for product in category.product_set.all %}
+                <!-- Card -->
+                <div class="pro">
+                    <img src="{{ product.image.url }}" alt="">
+                    <div class="des">
+                        <span>{{ product.name }}</span>
+                        <h4>₹{{ product.price }}</h4>
+                        <h5>{{ product.description }}</h5>
+                        {% if product.is_out_of_stock %}
+                        <p style="color: red;">Out of Stock.</p>
+
+                        {% else %}
+                            <p>Available: {{ product.quantity }} in stock</p>
+                        {% endif %}
+                        <div style="display: flex; justify-content: center; align-items: center;" class="btn">
+                            <a href="{% url 'add_to_cart' product.id %}" class="button">ADD</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+{% endfor %}
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get all category links in the dropdown
+        var categoryLinks = document.querySelectorAll('.dropdown-content a');
+
+        // Add click event listener to each category link
+        categoryLinks.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                // Get the target category section
+                var targetCategoryId = link.getAttribute('href').substring(1); // Remove the '#' symbol
+                var targetCategorySection = document.getElementById(targetCategoryId);
+
+                // Scroll to the target category section smoothly
+                if (targetCategorySection) {
+                    targetCategorySection.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>  {% endcomment %}
+
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helmet Website</title>
+    <link rel="stylesheet" href="{% static 'stle.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+            
+            .dropdown {
+                position: relative;
+                display: inline-block;
+              }
+          
+              .dropbtn {
+                padding: 10px;
+                font-size: 16px;
+                border: none;
+                cursor: pointer;
+                color:green;
+              }
+          
+              .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+              }
+          
+              .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+              }
+          
+              .dropdown-content a:hover {
+                background-color: #f1f1f1;
+              }
+          
+              .dropdown:hover .dropdown-content {
+                display: block;
+              }
+          
+              .dropdown:hover .dropbtn {
+                background-color: #3e8e41;
+                color: white;
+              }
+        </style>
+        
+   
+</head>
+<body>
+    {% include 'messages.html' %}
+    {% include 'navbar.html' %}
+   
+    <!-- Home Page -->
+    {% comment %} <section id="hero">
+        <div class="text">
+            <div class="img" style="margin-left: 227px; margin-bottom: 20px;">
+                <img src="{% static 'uploads/logo.png' %}" class="cl" alt="">
+            </div>
+            <h2>THE HELMET BIN</h2>
+            <h4>AXOR HELMETS AND VEGA HELMETS</h4>
+            <h5>ALL INDIA SELLER</h5>
+            <div class="btn"><button class="button">Shop Now</button></div>
+        </div>
+        <div class="image"><img src="{% static 'uploads/logo.png' %}" alt="Image"></div>
+    </section> {% endcomment %}
+
+
+        
+    {% comment %} <div class="image"><img src="{% static 'uploads/anime-cover.jpg' %}" alt="Image"></div> {% endcomment %}
+</section>
+
+
+
+    <!-- Category -->
+    <h1 style="text-align: center;">Category</h1>
+    
+
+    {% for category in categories %}
+    <section id="product1" class="section-p1">
+        <section id="{{ category.name|slugify }}" class="product-section">
+            <h4>{{ category.name }}</h4>
+            <div class="pro-container">
+                {% for product in category.product_set.all %}
+                {% if product.status == 'approved' %}
+                    <!-- Card -->
+                    <div class="pro">
+                        {% comment %} <a href="{% url 'product_detail' product.id %}"> {% endcomment %}
+                            <img src="{{ product.image.url }}" alt=""> 
+                            {% comment %} <img src="{{ product.image.url }}" alt=""> {% endcomment %}
+                            <div class="des">
+                                <span>{{ product.name }}</span>
+                                <h4>₹{{ product.price }}</h4>
+                                <h5>{{ product.description }}</h5>
+                                {% if product.is_out_of_stock %}
+                                <p style="color: red;">Out of Stock.</p>
+        
+                                {% else %}
+                                    <p>Available: {{ product.quantity }} in stock</p>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                        <!-- Your existing product card code -->
+                 {% endif %}
+                {% endfor %}
+            </div>
+        
+        </section>
+    </section>
+    {% endfor %}
+
+    <!-- Your existing JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var categoryLinks = document.querySelectorAll('.dropdown-content a');
+
+            categoryLinks.forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var targetCategoryId = link.getAttribute('href').substring(1);
+                    var targetCategorySection = document.getElementById(targetCategoryId);
+
+                    if (targetCategorySection) {
+                        targetCategorySection.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+

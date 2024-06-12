@@ -1,0 +1,37 @@
+<!-- order_confirmation.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+</head>
+<body>
+    <h1>Order Confirmation</h1>
+    
+    <h2>Order Details</h2>
+    <p><strong>Order Number:</strong> {{ order.id }}</p>
+    <p><strong>Date:</strong> {{ order.date }}</p>
+    
+    <h3>Shipping Details</h3>
+    <p><strong>Address:</strong> {{ order.shipping_details.address }}</p>
+    <p><strong>City:</strong> {{ order.shipping_details.city }}</p>
+    <p><strong>State:</strong> {{ order.shipping_details.state }}</p>
+    <p><strong>Zip Code:</strong> {{ order.shipping_details.zip_code }}</p>
+    
+    <h3>Ordered Items</h3>
+    <ul>
+        {% for item in order.orderitem_set.all %}
+            <li>
+                <p><strong>Product:</strong> {{ item.product.name }}</p>
+                <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+                <p><strong>Price:</strong> ₹ {{ item.product.price }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Total Price: ₹ {{ order.total_price }}</h2>
+    
+    <!-- You can include additional details or links here -->
+</body>
+</html>

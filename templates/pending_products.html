@@ -1,0 +1,89 @@
+ {% comment %} <!-- pending_products.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Products</title>
+</head>
+<body>
+    <h1>Pending Products</h1>
+    <ul>
+        {% for product in pending_products %}
+            <li>{{ product.name }}</li>
+            <!-- Add other fields you want to display -->
+        {% empty %}
+            <li>No pending products</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>  {% endcomment %}
+
+{% comment %} 
+
+<!-- pending_products.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Products</title>
+</head>
+<body>
+    <h1>Pending Products</h1>
+    <form method="post">
+        {% csrf_token %}
+        <ul>
+            {% for product in pending_products %}
+                <li>
+                    {{ product.name }}
+                    <select name="status_{{ product.id }}">
+                        <option value="approved">Approve</option>
+                        <option value="rejected">Reject</option>
+                    </select>
+                </li>
+            {% endfor %}
+        </ul>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html> {% endcomment %}
+<!-- pending_products.html -->
+
+
+{% load static %}
+{% include 'navbar.html'  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Products</title>
+    <link rel="stylesheet" href="{% static 'stle.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <h2>Pending Products</h2>
+    <form method="post">
+        {% csrf_token %}
+        <ul>
+            {% for product in pending_products %}
+                <li>
+                    {{ product.name }}
+                    <select name="status_{{ product.id }}">
+                        <option value="pending" selected>Pending</option>
+                        <option value="approved">Approve</option>
+                        <option value="rejected">Reject</option>
+                    </select>
+                </li>
+
+
+
+                {% empty %}
+                <li>No pending products</li>
+            {% endfor %}
+        </ul>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

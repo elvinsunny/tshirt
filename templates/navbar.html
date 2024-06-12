@@ -1,0 +1,202 @@
+{% comment %} {% load static %}
+
+<!-- Navigation Bar -->
+{% include 'messages.html' %}
+<!-- Logo -->
+<section id="header">
+    <a href="#"><img src="{% static 'uploads/logo-png.png' %}" class="logo" alt="" style="width: 180px;"></a>
+
+
+    <!-- Navigation Bar -->
+    <div>
+        <ul id="navbar">
+            <li><a class="active" href="{% url 'hom' %}">Home</a></li>
+
+
+            
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'view' %}">ADMIN</a></li>
+                <li><a href="{% url 'new_suppliers' %}">New Suppliers</a></li>
+                <li><a href="{% url 'pending_products' %}">Pending Products</a></li>
+                <li><a href="{% url 'view_orders' %}">View Order List</a></li> 
+                <li><a href="{% url 'approved_sellers' %}">Supplier</a></li> 
+                <li><a href="{% url 'list_users' %}">View users</a></li>
+                  <li>  <a href="#">Welcome, {{ user.username }}</a></li>
+                  <li>  <a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                   <li> <a href="{% url 'seller_login' %}">Login</a></li>
+                {% endif %}
+           
+            
+            
+
+            
+
+
+        </ul>
+    </div>
+</section>  {% endcomment %}
+
+{% comment %} 
+
+{% load static %}
+<!-- Navigation Bar -->
+{% include 'messages.html' %}
+<!-- Logo -->
+<section id="header">
+    <a href="#"><img src="{% static 'uploads/logo-png.png' %}" class="logo" alt="" style="width: 180px;"></a>
+
+    <!-- Navigation Bar -->
+    <div>
+        <ul id="navbar">
+            <li><a class="active" href="{% url 'hom' %}">Home</a></li>
+
+            {% if user.is_authenticated %}
+                <li><a href="#">Welcome, {{ user.username }}</a></li>
+
+                <li class="dropdown">
+                    <button class="dropbtn">Menu</button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'view' %}">Edit/Delete</a>
+                        <a href="{% url 'new_suppliers' %}">New Suppliers</a>
+                        <a href="{% url 'pending_products' %}">Pending Products</a>
+                        <a href="{% url 'view_orders' %}">View Order List</a>
+                        <a href="{% url 'approved_sellers' %}">View Supplier</a>
+                        <a href="{% url 'list_users' %}">View users</a>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </li>
+            {% else %}
+                <li><a href="{% url 'seller_login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</section>
+
+<style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropbtn {
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        color: green;
+        background-color: white;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+        color: white;
+    }
+</style> {% endcomment %}
+
+
+
+
+{% load static %}
+
+<!-- Navigation Bar -->
+{% include 'messages.html' %}
+<!-- Logo -->
+<section id="header">
+    <a href="#"><img src="{% static 'uploads/logo-png.png' %}" class="logo" alt="" style="width: 180px;"></a>
+
+    <!-- Navigation Bar -->
+    <div>
+        <ul id="navbar">
+            <li><a class="active" href="{% url 'hom' %}">Home</a></li>
+
+            {% if user.is_authenticated %}
+                <li><a href="#">Welcome, {{ user.username }}</a></li>
+
+                <li class="profile-dropdown">
+                    <button class="profile-dropbtn">Menu</button>
+                    <div class="profile-dropdown-content">
+                        <a href="{% url 'view' %}">Edit/Delete</a>
+                        <a href="{% url 'new_suppliers' %}">New Suppliers</a>
+                        <a href="{% url 'pending_products' %}">Pending Products</a>
+                        <a href="{% url 'view_orders' %}">View Order List</a>
+                        <a href="{% url 'approved_sellers' %}">Supplier</a>
+                        <a href="{% url 'list_users' %}">View users</a>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </li>
+            {% else %}
+                <li><a href="{% url 'seller_login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</section>
+
+<style>
+    .profile-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .profile-dropbtn {
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        color: green;
+        background-color: white;
+    }
+
+    .profile-dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .profile-dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .profile-dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .profile-dropdown:hover .profile-dropdown-content {
+        display: block;
+    }
+
+    .profile-dropdown:hover .profile-dropbtn {
+        background-color: #3e8e41;
+        color: white;
+    }
+</style>

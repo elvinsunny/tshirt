@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Detail</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+        .container {
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+        }
+        .card-header {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ccc;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .table, .table th, .table td {
+            border: 1px solid #ccc;
+        }
+        .table th, .table td {
+            padding: 10px;
+            text-align: left;
+        }
+        .table thead {
+            background-color: #f8f8f8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="h3 mb-0">Order Detail</h1>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2 class="h5">Order Information</h2>
+                        <p><strong>Order ID:</strong> {{ order.id }}</p>
+                        <p><strong>Total Price:</strong> ₹ {{ order.total_price }}</p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <h2 class="h5">Customer Information</h2>
+                        <p><strong>Name:</strong> {{ order.user }} 
+                        <p><strong>Email:</strong> {{ order.user.email }}</p>
+                    </div>
+                </div>
+                <hr>
+                <h2 class="h5">Ordered Items:</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Price per Unit</th>
+                            <th>Quantity</th>
+                            <th>Seller</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.orderitem_set.all %}
+                            <tr>
+                                <td>{{ item.product.name }}</td>
+                                <td>₹ {{ item.price }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.product.seller.user }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

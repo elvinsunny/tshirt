@@ -1,0 +1,115 @@
+{% comment %} <!-- view_profile.html -->
+{% load static %}
+<!DOCTYPE html>
+{% include 'navbar.html' %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Profile</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helmet Website</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <h1>Welcome, {{ username }}</h1>
+    <p><strong>User Name:</strong> {{ username }}</p>
+    <p><strong>First Name:</strong> {{ customer.fname }}</p>
+    <p><strong>Last Name:</strong> {{ customer.lname }}</p>
+    <p><strong>Email:</strong> {{ customer.email }}</p>
+    <p><strong>Phone:</strong> {{ customer.phone }}</p>
+    <!-- Add more profile details as needed -->
+
+    <a href="{% url 'edit_profile' %}">Edit Profile</a>
+</body>
+</html> {% endcomment %}
+
+{% load static %}
+{% include 'navnar1.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Profile</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'stle.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section.profile {
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .profile h1 {
+            color: #333;
+        }
+
+        .profile-info {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .profile-info p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .edit-profile-link {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-profile-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <section class="profile">
+        <div class="container">
+            <h1>Welcome, {{ customer.fname }} {{ customer.lname }}</h1>
+            <div class="profile-info">
+                <p><strong>User Name:</strong> {{ username }}</p>
+                <p><strong>First Name:</strong> {{ customer.fname }}</p>
+                <p><strong>Last Name:</strong> {{ customer.lname }}</p>
+                <p><strong>Email:</strong> {{ customer.email }}</p>
+                <p><strong>Phone:</strong> {{ customer.phone }}</p>
+                <!-- Add more profile details as needed -->
+            </div>
+            <a href="{% url 'edit_profile' %}" class="edit-profile-link">Edit Profile</a>
+        </div>
+    </section>
+</body>
+</html>
+
